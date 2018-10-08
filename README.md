@@ -1,7 +1,21 @@
+# Feed Reader Master
+===============================
+## Table Of Contents
+
+* [Project Overview](#project-overview)
+* [How To Run The Project](#how-to-run-the-project)
+* [Why This Project?](#why-this-project?)
+* [What Will I Learn?](#what-will-i-learn?)
+* [How Will I Complete This Project?](how-will-i-complete-this-project?)
+* [Conclusion](#conclusion)
+
 # Project Overview
 
 In this project you are given a web-based application that reads RSS feeds. The original developer of this application clearly saw the value in testing, they've already included [Jasmine](http://jasmine.github.io/) and even started writing their first test suite! Unfortunately, they decided to move on to start their own company and we're now left with an application with an incomplete test suite. That's where you come in.
 
+## How to run the project?
+
+To run this project, first you'll need to download the project or clone the repo. To do this, go to the Green button that reads: "Clone or Download". It will give you the option to download the project in a zip folder, which you can extract on your desktop, or clone this repository via git by a url it provides. If you don't know how to clone a repository, here is the documentation from [GitHub Help](https://help.github.com/articles/cloning-a-repository/). Once you've downloaded and extracted or cloned the project, go to the location of the folder, open up the folder, and double click on the index.html file. This will automatically open up the file on your browser. 
 
 ## Why this Project?
 
@@ -46,3 +60,7 @@ Review the Feed Reader Testing [Project Rubric](https://review.udacity.com/#!/pr
 19. Implement error handling for undefined variables and out-of-bound array access.
 20. When complete - all of your tests should pass. 
 21. Write a README file detailing all steps required to successfully run the application. If you have added additional tests (for Udacious Test Coverage),  provide documentation for what these future features are and what the tests are checking for.
+
+## Conclusion
+
+While this project was quicker than the previous projects, it was rather complex because my mindset wasn't about applying functions, but making functions to test the applications. I never used Jasmine before this program, but it was very interesting to see how it got used for this project. 
