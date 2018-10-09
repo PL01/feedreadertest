@@ -22,8 +22,12 @@ $(function() {
          * page?
          */
         it('are defined', function() {
-            expect(allFeeds).toBeDefined();
+            expect(allFeeds).toBeDefined(); 
             expect(allFeeds.length).not.toBe(0);
+            // Jasmine uses expect() with a variable passed inside it’s parenthesis for the item being tested.
+            // toBeDefined() checks if whether or not the variable is defined.
+            // we then check the .length property of allFeeds with .not.toBe(0) 
+            // to “expect” a value for the length variable to be greater than 0. 
         });
 
 
@@ -33,7 +37,7 @@ $(function() {
          */
         it('url defined', function(){
             for(let feed of allFeeds){
-                expect(feed.url).toBeDefined();
+                expect(feed.url).toBeDefined(); //Same as with are defined, but focused on the url defintion.
             }
         });
 
@@ -44,7 +48,7 @@ $(function() {
          */
         it('name defined', function () {
             for (let feed of allFeeds) {
-                expect(feed.name).toBeDefined();
+                expect(feed.name).toBeDefined(); //Same as before, but focused on the name defintions.
             }
         });
     });
@@ -52,32 +56,31 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
     describe('The menu', function (){
-    
-    /* TODO: Write a test that ensures the menu element is
-    * hidden by default. You'll have to analyze the HTML and
-    * the CSS to determine how we're performing the
-    * hiding/showing of the menu element.
-    */
-    it('is hidden', function(){
-        const body = document.querySelector('body');
-        expect(body.classList.contains('menu-hidden')).toBe(true);
-    });
+        /* TODO: Write a test that ensures the menu element is
+        * hidden by default. You'll have to analyze the HTML and
+        * the CSS to determine how we're performing the
+        * hiding/showing of the menu element.
+        */
+        it('is hidden', function(){
+            const body = document.querySelector('body');
+            expect(body.classList.contains('menu-hidden')).toBe(true); //checks for the menu hidden class on the body
+        });
 
 
-    /* TODO: Write a test that ensures the menu changes
-    * visibility when the menu icon is clicked. This test
-    * should have two expectations: does the menu display when
-    * clicked and does it hide when clicked again.
-    */
-    it('toggles on and off', function(){
-        const body = document.querySelector('body');
-        const menu = document.querySelector('.menu-icon-link');
-        
-        menu.click();
-        expect(body.classList.contains('menu-hidden')).toBe(false);
-        menu.click();
-        expect(body.classList.contains('menu-hidden')).toBe(true);
-    });
+        /* TODO: Write a test that ensures the menu changes
+        * visibility when the menu icon is clicked. This test
+        * should have two expectations: does the menu display when
+        * clicked and does it hide when clicked again.
+        */
+        it('toggles on and off', function(){
+            const body = document.querySelector('body');
+            const menu = document.querySelector('.menu-icon-link');
+            
+            menu.click(); //simulates a click on the menu icon link.
+            expect(body.classList.contains('menu-hidden')).toBe(false); // tests for the toggle "on"
+            menu.click();
+            expect(body.classList.contains('menu-hidden')).toBe(true); // tests for the toggle "off"
+        });
     });
 
 
@@ -89,13 +92,17 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        beforeEach(function (done) {
+        beforeEach(function (done) { 
             loadFeed(0, done);
         });
+        //for this function, we call loadFeed() for the first index, 0, and done.
+        // Jasmine's done let’s our test know that before each function has “finished” 
+        // and we proceed with our test, and not after. 
 
         it('completes work', function() {
             const feed = document.querySelector('.feed');
             expect(feed.children.length > 0).toBe(true);
+            // feed's children property should have a length greater than 0, in order to be true.
         });
     });
 
