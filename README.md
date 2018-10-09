@@ -6,7 +6,7 @@
 * [How To Run The Project](#how-to-run-the-project)
 * [Why This Project?](#why-this-project)
 * [What Will I Learn?](#what-will-i-learn)
-* [How Will I Complete This Project?](how-will-i-complete-this-project)
+* [How Will I Complete This Project?](#how-will-i-complete-this-project)
 * [Conclusion](#conclusion)
 
 # Project Overview
@@ -35,7 +35,7 @@ You will learn how to use Jasmine to write a number of tests against a pre-exist
 * Good tests give you the ability to quickly analyze whether new code breaks an existing feature within your codebase, without having to manually test all of the functionality.
 
 
-## How will I complete this project?
+# How will I complete this project?
 
 Review the Feed Reader Testing [Project Rubric](https://review.udacity.com/#!/projects/3442558598/rubric)
 
