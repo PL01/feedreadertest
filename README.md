@@ -4,9 +4,9 @@
 
 * [Project Overview](#project-overview)
 * [How To Run The Project](#how-to-run-the-project)
-* [Why This Project?](#why-this-project?)
-* [What Will I Learn?](#what-will-i-learn?)
-* [How Will I Complete This Project?](how-will-i-complete-this-project?)
+* [Why This Project?](#why-this-project)
+* [What Will I Learn?](#what-will-i-learn)
+* [How Will I Complete This Project?](how-will-i-complete-this-project)
 * [Conclusion](#conclusion)
 
 # Project Overview
