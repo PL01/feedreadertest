@@ -109,30 +109,34 @@ $(function() {
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
-    describe('New Feed Selection', function() {
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
-        const feed = document.querySelector('.feed');
-        const firstFeed = [];
-        
-        beforeEach(function(done) {
-            loadFeed(0);
-            //console.log(feed.children[0].innerText);
-            Array.from(feed.children).forEach(function(entry){
-                firstFeed.push(entry.innerText);
+    describe('News Feed Selection', function () {
+        // Establishes DOM elements and empty arrays for later testing. 
+        const feedly = document.querySelector('.feed');
+        const feedOne = []; // you had one
+        const feedTwo = []; // try another!
+        // As per spec, `done` is passed as an argument to the `beforeEach` function
+        beforeEach(function (done) { // you may also wish to convert this to ES6, which is totally doable!
+            //loads the first feed and executes a function to push each article to `feedOne` array
+            // remember, this is supposed to simulate asynchronous behavior
+            loadFeed(0, function () { // feed 1 is actually at index position zero
+                Array.from(feedly.children).forEach(function (feed) { // you could use specificity here, too, couldn't you?
+                    // console.log(feed); // test it out
+                    feedOne.push(feed.innerText); // we want the text of the element to evaluate against the next feed
+                    // loads the second feed and executes a function to push each article to the `feedTwo` array
+                    loadFeed(1, function () { // feed 2 at index position 1
+                        Array.from(feedly.children).forEach(function (feed) { // also, look up Array.from on MDN to learn more about what it does :-)
+                            feedTwo.push(feed.innerText);
+                        });
+                        console.log(feedOne); // test
+                        console.log(feedTwo); // again, test -- what do you see when you look at the results?
+                        // executes `done()` function to cease asynchronous operation and signal that processing has completed
+                        done();
+                    });
+                });
             });
-            loadFeed(1, done);
         });
-
-
-        it('content changes', function() {
-            //console.log(feed.children[0].innerText);
-            Array.from(feed.children).forEach(function(entry,index){
-                console.log(entry.innerText, firstFeed[index], entry.innerText === firstFeed[index]);
-                expect(entry.innerText === firstFeed[index]).toBe(false);
-            });
+        it('actually changes', function () {
+            expect(feedOne).not.toEqual(feedTwo); // there are a few ways to do this, but I prefer toEqual since it doesn't test for strict equality
         });
     });
 });
