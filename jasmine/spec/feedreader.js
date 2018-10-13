@@ -92,16 +92,18 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        beforeEach(function (done) { 
-            loadFeed(0, done);
-        });
+        beforeEach(done => {
+            loadFeed(0, () => {
+                done();
+            });
+        })
         //for this function, we call loadFeed() for the first index, 0, and done.
         // Jasmine's done let’s our test know that before each function has “finished” 
         // and we proceed with our test, and not after. 
 
         it('completes work', function() {
-            const feed = document.querySelector('.feed');
-            expect(feed.children.length > 0).toBe(true);
+            const feed = document.querySelectorAll('.feed .entry');
+            expect(feed.length).toBeGreaterThan(0);
             // feed's children property should have a length greater than 0, in order to be true.
         });
     });
@@ -115,22 +117,29 @@ $(function() {
         const feed = document.querySelector('.feed');
         const firstFeed = [];
         
-        beforeEach(function(done) {
-            loadFeed(0);
-            //console.log(feed.children[0].innerText);
-            Array.from(feed.children).forEach(function(entry){
-                firstFeed.push(entry.innerText);
+        beforeEach(function (done) { // you may also wish to convert this to ES6, which is totally doable!
+            //loads the first feed and executes a function to push each article to `feedOne` array
+            // remember, this is supposed to simulate asynchronous behavior
+            loadFeed(0, function () { // feed 1 is actually at index position zero
+                Array.from(feedly.children).forEach(function (feed) { // you could use specificity here, too, couldn't you?
+                    // console.log(feed); // test it out
+                    feedOne.push(feed.innerText); // we want the text of the element to evaluate against the next feed
+                    // loads the second feed and executes a function to push each article to the `feedTwo` array
+                    loadFeed(1, function () { // feed 2 at index position 1
+                        Array.from(feedly.children).forEach(function (feed) { // also, look up Array.from on MDN to learn more about what it does :-)
+                            feedTwo.push(feed.innerText);
+                        });
+                        console.log(feedOne); // test
+                        console.log(feedTwo); // again, test -- what do you see when you look at the results?
+                        // executes `done()` function to cease asynchronous operation and signal that processing has completed
+                        done();
+                    });
+                });
             });
-            loadFeed(1, done);
         });
 
-
-        it('content changes', function() {
-            //console.log(feed.children[0].innerText);
-            Array.from(feed.children).forEach(function(entry,index){
-                console.log(entry.innerText, firstFeed[index], entry.innerText === firstFeed[index]);
-                expect(entry.innerText === firstFeed[index]).toBe(false);
-            });
+        it('actually changes', function() {
+            expect(feedOne).not.toEqual(feedTwo); // there are a few ways to do this, but I prefer toEqual since it doesn't test for strict equality
         });
     });
 });
