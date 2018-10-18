@@ -8,12 +8,13 @@
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
  */
-$(function() {
+$(function () {
     /* This is our first test suite - a test suite just contains
     * a related set of tests. This suite is all about the RSS
     * feeds definitions, the allFeeds variable in our application.
     */
-    describe('RSS Feeds', function() {
+
+    describe('RSS Feeds', () => {
         /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
          * empty. Experiment with this before you get started on
@@ -21,8 +22,8 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
-        it('are defined', function() {
-            expect(allFeeds).toBeDefined(); 
+        it('are defined', () => {
+            expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
             // Jasmine uses expect() with a variable passed inside it’s parenthesis for the item being tested.
             // toBeDefined() checks if whether or not the variable is defined.
@@ -35,8 +36,8 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-        it('url defined', function(){
-            for(let feed of allFeeds){
+        it('url defined', () => {
+            for (let feed of allFeeds) {
                 expect(feed.url).toBeDefined(); //Same as with are defined, but focused on the url defintion.
             }
         });
@@ -46,7 +47,7 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-        it('name defined', function () {
+        it('name defined', () => {
             for (let feed of allFeeds) {
                 expect(feed.name).toBeDefined(); //Same as before, but focused on the name defintions.
             }
@@ -55,13 +56,13 @@ $(function() {
 
 
     /* TODO: Write a new test suite named "The menu" */
-    describe('The menu', function (){
+    describe('The menu', () => {
         /* TODO: Write a test that ensures the menu element is
         * hidden by default. You'll have to analyze the HTML and
         * the CSS to determine how we're performing the
         * hiding/showing of the menu element.
         */
-        it('is hidden', function(){
+        it('is hidden', () => {
             const body = document.querySelector('body');
             expect(body.classList.contains('menu-hidden')).toBe(true); //checks for the menu hidden class on the body
         });
@@ -72,10 +73,10 @@ $(function() {
         * should have two expectations: does the menu display when
         * clicked and does it hide when clicked again.
         */
-        it('toggles on and off', function(){
+        it('toggles on and off', () => {
             const body = document.querySelector('body');
             const menu = document.querySelector('.menu-icon-link');
-            
+
             menu.click(); //simulates a click on the menu icon link.
             expect(body.classList.contains('menu-hidden')).toBe(false); // tests for the toggle "on"
             menu.click();
@@ -85,7 +86,7 @@ $(function() {
 
 
     /* TODO: Write a new test suite named "Initial Entries" */
-    describe('Initial Entries', function() {
+    describe('Initial Entries', () => {
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
@@ -98,10 +99,10 @@ $(function() {
             });
         });
         //for this function, we call loadFeed() for the first index, 0, and done.
-        // Jasmine's done let’s our test know that before each function has “finished” 
+        // Jasmine's 'done' let’s our test know that before each function has “finished” 
         // and we proceed with our test, and not after. 
 
-        it('completes work', function() {
+        it('completes work', () => {
             const feed = document.querySelectorAll('.feed .entry');
             expect(feed.length).toBeGreaterThan(0);
             // feed's children property should have a length greater than 0, in order to be true.
@@ -109,34 +110,34 @@ $(function() {
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
-    describe('News Feed Selection', function () {
+    describe('News Feed Selection', () => {
         // Establishes DOM elements and empty arrays for later testing. 
         const feedly = document.querySelector('.feed');
-        const feedOne = []; // you had one
-        const feedTwo = []; // try another!
-        // As per spec, `done` is passed as an argument to the `beforeEach` function
-        beforeEach(function (done) { // you may also wish to convert this to ES6, which is totally doable!
+        const feedOne = [];
+        const feedTwo = [];
+        // `done` is passed as an argument to the `beforeEach` function
+        beforeEach((done) => {
             //loads the first feed and executes a function to push each article to `feedOne` array
             // remember, this is supposed to simulate asynchronous behavior
-            loadFeed(0, function () { // feed 1 is actually at index position zero
-                Array.from(feedly.children).forEach(function (feed) { // you could use specificity here, too, couldn't you?
-                    // console.log(feed); // test it out
-                    feedOne.push(feed.innerText); // we want the text of the element to evaluate against the next feed
+            loadFeed(0, () => { // feed 1 is  at index[0]
+                Array.from(feedly.children).forEach(function (feed) {
+                    feedOne.push(feed.innerText);
+                    // we want the text of the element to evaluate against the next feed
                     // loads the second feed and executes a function to push each article to the `feedTwo` array
-                    loadFeed(1, function () { // feed 2 at index position 1
-                        Array.from(feedly.children).forEach(function (feed) { // also, look up Array.from on MDN to learn more about what it does :-)
+                    loadFeed(1, () => { // feed 2 at index[1]
+                        Array.from(feedly.children).forEach(function (feed) {
                             feedTwo.push(feed.innerText);
                         });
-                        console.log(feedOne); // test
-                        console.log(feedTwo); // again, test -- what do you see when you look at the results?
+                        console.log(feedOne); // test1
+                        console.log(feedTwo); // test2
                         // executes `done()` function to cease asynchronous operation and signal that processing has completed
                         done();
                     });
                 });
             });
         });
-        it('actually changes', function () {
-            expect(feedOne).not.toEqual(feedTwo); // there are a few ways to do this, but I prefer toEqual since it doesn't test for strict equality
+        it('actually changes', () => {
+            expect(feedOne).not.toEqual(feedTwo);
         });
     });
-});
+}());
